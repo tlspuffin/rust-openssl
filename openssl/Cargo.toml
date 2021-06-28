@@ -18,6 +18,9 @@ v110 = []
 v111 = []
 
 vendored = ['ffi/vendored']
+sancov = ['ffi/sancov']
+no-rand = ['ffi/no-rand']
+asan = ['ffi/asan']
 
 [dependencies]
 bitflags = "1.0"
