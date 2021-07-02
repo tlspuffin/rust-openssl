@@ -16,6 +16,7 @@ vendored = ['openssl-src']
 sancov = ['openssl-src/sancov']
 no-rand = ['openssl-src/no-rand']
 asan = ['openssl-src/asan']
+weak-crypto = ['openssl-src/weak-crypto']
 
 [dependencies]
 libc = "0.2"
