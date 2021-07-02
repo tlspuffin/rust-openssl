@@ -106,6 +106,8 @@ pub use crate::ssl::connector::{
     ConnectConfiguration, SslAcceptor, SslAcceptorBuilder, SslConnector, SslConnectorBuilder,
 };
 pub use crate::ssl::error::{Error, ErrorCode, HandshakeError};
+use ffi::RSA;
+use crate::rsa::Rsa;
 
 mod bio;
 mod callbacks;
@@ -879,6 +881,18 @@ impl SslContextBuilder {
         unsafe {
             self.set_ex_data(SslContext::cached_ex_index::<F>(), callback);
             ffi::SSL_CTX_set_tmp_ecdh_callback(self.as_ptr(), raw_tmp_ecdh::<F>);
+        }
+    }
+
+
+    #[cfg(all(ossl101, not(ossl110)))]
+    pub fn set_tmp_rsa_callback<F>(&mut self, callback: F)
+        where
+            F: Fn(&mut SslRef, bool, u32) -> Result<Rsa<Private>, ErrorStack> + 'static + Sync + Send,
+    {
+        unsafe {
+            self.set_ex_data(SslContext::cached_ex_index::<F>(), callback);
+            ffi::SSL_CTX_set_tmp_rsa_callback(self.as_ptr(), raw_tmp_rsa::<F>);
         }
     }
 

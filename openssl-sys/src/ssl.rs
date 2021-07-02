@@ -1343,6 +1343,15 @@ extern "C" {
             keylength: c_int,
         ) -> *mut ::EC_KEY,
     );
+    #[cfg(not(ossl110))]
+    pub fn SSL_CTX_set_tmp_rsa_callback(
+        ctx: *mut ::SSL_CTX,
+        ecdh: unsafe extern "C" fn(
+            ssl: *mut ::SSL,
+            is_export: c_int,
+            keylength: c_int,
+        ) -> *mut ::RSA,
+    );
     // FIXME should take an option
     #[cfg(not(ossl110))]
     pub fn SSL_set_tmp_ecdh_callback(

@@ -19,7 +19,7 @@ use crate::dh::Dh;
 #[cfg(all(ossl101, not(ossl110)))]
 use crate::ec::EcKey;
 use crate::error::ErrorStack;
-use crate::pkey::Params;
+use crate::pkey::{Params, Private};
 #[cfg(any(ossl102, libressl261))]
 use crate::ssl::AlpnError;
 use crate::ssl::{
@@ -33,6 +33,7 @@ use crate::util::ForeignTypeRefExt;
 #[cfg(ossl111)]
 use crate::x509::X509Ref;
 use crate::x509::{X509StoreContext, X509StoreContextRef};
+use crate::rsa::Rsa;
 
 pub extern "C" fn raw_verify<F>(preverify_ok: c_int, x509_ctx: *mut ffi::X509_STORE_CTX) -> c_int
 where
@@ -253,6 +254,34 @@ where
         Ok(ec_key) => {
             let ptr = ec_key.as_ptr();
             mem::forget(ec_key);
+            ptr
+        }
+        Err(e) => {
+            e.put();
+            ptr::null_mut()
+        }
+    }
+}
+
+#[cfg(all(ossl101, not(ossl110)))]
+pub unsafe extern "C" fn raw_tmp_rsa<F>(
+    ssl: *mut ffi::SSL,
+    is_export: c_int,
+    keylength: c_int,
+) -> *mut ffi::RSA
+    where
+        F: Fn(&mut SslRef, bool, u32) -> Result<Rsa<Private>, ErrorStack> + 'static + Sync + Send,
+{
+    let ssl = SslRef::from_ptr_mut(ssl);
+    let callback = ssl
+        .ssl_context()
+        .ex_data(SslContext::cached_ex_index::<F>())
+        .expect("BUG: tmp rsa callback missing") as *const F;
+
+    match (*callback)(ssl, is_export != 0, keylength as u32) {
+        Ok(rsa_key) => {
+            let ptr = rsa_key.as_ptr();
+            mem::forget(rsa_key);
             ptr
         }
         Err(e) => {
