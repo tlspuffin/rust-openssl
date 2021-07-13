@@ -106,8 +106,6 @@ pub use crate::ssl::connector::{
     ConnectConfiguration, SslAcceptor, SslAcceptorBuilder, SslConnector, SslConnectorBuilder,
 };
 pub use crate::ssl::error::{Error, ErrorCode, HandshakeError};
-use ffi::RSA;
-use crate::rsa::Rsa;
 
 mod bio;
 mod callbacks;

@@ -19,7 +19,7 @@ use crate::dh::Dh;
 #[cfg(all(ossl101, not(ossl110)))]
 use crate::ec::EcKey;
 use crate::error::ErrorStack;
-use crate::pkey::{Params, Private};
+use crate::pkey::{Params};
 #[cfg(any(ossl102, libressl261))]
 use crate::ssl::AlpnError;
 use crate::ssl::{
@@ -33,7 +33,6 @@ use crate::util::ForeignTypeRefExt;
 #[cfg(ossl111)]
 use crate::x509::X509Ref;
 use crate::x509::{X509StoreContext, X509StoreContextRef};
-use crate::rsa::Rsa;
 
 pub extern "C" fn raw_verify<F>(preverify_ok: c_int, x509_ctx: *mut ffi::X509_STORE_CTX) -> c_int
 where
