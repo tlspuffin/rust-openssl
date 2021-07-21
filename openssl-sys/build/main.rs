@@ -2,8 +2,10 @@
 
 extern crate autocfg;
 extern crate cc;
-#[cfg(feature = "vendored")]
+#[cfg(feature = "vendored-openssl111")]
 extern crate openssl_src;
+#[cfg(feature = "vendored-libressl")]
+extern crate libressl_src;
 extern crate pkg_config;
 #[cfg(target_env = "msvc")]
 extern crate vcpkg;

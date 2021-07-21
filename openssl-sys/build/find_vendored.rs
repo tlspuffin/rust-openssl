@@ -1,3 +1,6 @@
+#[cfg(feature = "vendored-libressl")]
+use libressl_src as openssl_src;
+#[cfg(feature = "vendored-openssl")]
 use openssl_src;
 use std::path::PathBuf;
 
