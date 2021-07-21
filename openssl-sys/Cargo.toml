@@ -12,11 +12,13 @@ links = "openssl"
 build = "build/main.rs"
 
 [features]
-vendored = ['openssl-src']
-sancov = ['openssl-src/sancov']
-no-rand = ['openssl-src/no-rand']
-asan = ['openssl-src/asan']
-weak-crypto = ['openssl-src/weak-crypto']
+vendored = []
+vendored-openssl111 = ['openssl-src']
+vendored-libressl = ['libressl-src']
+sancov = ['openssl-src/sancov'] # Missing for libressl
+no-rand = ['openssl-src/no-rand'] # Missing for libressl
+asan = ['openssl-src/asan'] # Missing for libressl
+weak-crypto = ['openssl-src/weak-crypto'] # Missing for libressl
 
 [dependencies]
 libc = "0.2"
@@ -24,6 +26,7 @@ libc = "0.2"
 [build-dependencies]
 cc = "1.0"
 openssl-src = { path = "../../rust-openssl-src", optional = true, features = []}
+libressl-src = { path = "../../rust-libressl-src", optional = true, features = []}
 pkg-config = "0.3.9"
 autocfg = "1.0"
 
@@ -33,3 +36,4 @@ vcpkg = "0.2.8"
 # We don't actually use metadeps for annoying reasons but this is still here for tooling
 [package.metadata.pkg-config]
 openssl = "1.0.1"
+
