@@ -15,10 +15,10 @@ build = "build/main.rs"
 vendored = []
 vendored-openssl111 = ['openssl-src']
 vendored-libressl = ['libressl-src']
-sancov = ['openssl-src/sancov'] # Missing for libressl
-no-rand = ['openssl-src/no-rand'] # Missing for libressl
-asan = ['openssl-src/asan'] # Missing for libressl
-weak-crypto = ['openssl-src/weak-crypto'] # Missing for libressl
+sancov = ['openssl-src/sancov', 'libressl-src/sancov']
+no-rand = ['openssl-src/no-rand'] # todo Missing for libressl
+asan = ['openssl-src/asan'] # todo Missing for libressl
+weak-crypto = ['openssl-src/weak-crypto'] # todo Missing for libressl
 
 [dependencies]
 libc = "0.2"
