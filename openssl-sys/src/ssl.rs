@@ -280,6 +280,7 @@ pub const SSL_OP_DONT_INSERT_EMPTY_FRAGMENTS: ssl_op_type!() = 0x00000800;
 
 pub const SSL_OP_NO_QUERY_MTU: ssl_op_type!() = 0x00001000;
 pub const SSL_OP_COOKIE_EXCHANGE: ssl_op_type!() = 0x00002000;
+pub const SSL_OP_ALLOW_NO_DHE_KEX: ssl_op_type!() = 0x00000400;
 pub const SSL_OP_NO_TICKET: ssl_op_type!() = 0x00004000;
 cfg_if! {
     if #[cfg(ossl101)] {

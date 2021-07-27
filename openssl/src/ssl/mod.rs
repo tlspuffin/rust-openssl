@@ -163,6 +163,10 @@ bitflags! {
         /// [RFC 4347 Section 4.2.1]: https://tools.ietf.org/html/rfc4347#section-4.2.1
         const COOKIE_EXCHANGE = ffi::SSL_OP_COOKIE_EXCHANGE;
 
+        /// In TLSv1.3 allow a non-(ec)dhe based key exchange mode on resumption.
+        /// This means that there will be no forward secrecy for the resumed session.
+        const ALLOW_NO_DHE_KEX = ffi::SSL_OP_ALLOW_NO_DHE_KEX;
+
         /// Disables the use of session tickets for session resumption.
         const NO_TICKET = ffi::SSL_OP_NO_TICKET;
 
