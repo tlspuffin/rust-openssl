@@ -3796,6 +3796,10 @@ impl<S: Read + Write> SslStream<S> {
     pub fn set_shutdown(&mut self, state: ShutdownState) {
         unsafe { ffi::SSL_set_shutdown(self.ssl.as_ptr(), state.bits()) }
     }
+
+    pub fn clear(&mut self) -> u32 {
+        unsafe { ffi::SSL_clear(self.ssl.as_ptr()) as u32 }
+    }
 }
 
 impl<S> SslStream<S> {

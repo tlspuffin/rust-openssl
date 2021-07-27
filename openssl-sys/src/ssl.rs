@@ -1180,6 +1180,7 @@ extern "C" {
 
     pub fn SSL_do_handshake(ssl: *mut SSL) -> c_int;
     pub fn SSL_shutdown(ssl: *mut SSL) -> c_int;
+    pub fn SSL_clear(ssl: *mut SSL) -> c_int;
 
     pub fn SSL_CTX_set_client_CA_list(ctx: *mut SSL_CTX, list: *mut stack_st_X509_NAME);
 
