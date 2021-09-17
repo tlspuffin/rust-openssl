@@ -78,6 +78,7 @@ use std::ptr;
 use std::slice;
 use std::str;
 use std::sync::{Arc, Mutex};
+use crate::rsa::Rsa;
 
 use crate::dh::{Dh, DhRef};
 #[cfg(all(ossl101, not(ossl110)))]

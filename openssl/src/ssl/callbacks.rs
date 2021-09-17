@@ -16,6 +16,8 @@ use std::str;
 use std::sync::Arc;
 
 use crate::dh::Dh;
+use crate::rsa::Rsa;
+use crate::pkey::{Private};
 #[cfg(all(ossl101, not(ossl110)))]
 use crate::ec::EcKey;
 use crate::error::ErrorStack;
