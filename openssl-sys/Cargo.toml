@@ -14,6 +14,7 @@ build = "build/main.rs"
 [features]
 vendored = []
 vendored-openssl111 = ['openssl-src']
+vendored-openssl101f = ['openssl-src', 'openssl-src/openssl101f']
 vendored-libressl = ['libressl-src']
 sancov = ['openssl-src/sancov', 'libressl-src/sancov']
 no-rand = ['openssl-src/no-rand'] # todo Missing for libressl

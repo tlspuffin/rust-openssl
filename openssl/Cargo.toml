@@ -18,6 +18,7 @@ v110 = []
 v111 = []
 
 vendored-openssl111 = ['ffi/vendored-openssl111', 'ffi/vendored']
+vendored-openssl101f = ['ffi/vendored-openssl101f', 'ffi/vendored']
 vendored-libressl = ['ffi/vendored-libressl', 'ffi/vendored']
 sancov = ['ffi/sancov']
 no-rand = ['ffi/no-rand']
