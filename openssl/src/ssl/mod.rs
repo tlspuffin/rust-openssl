@@ -866,6 +866,13 @@ impl SslContextBuilder {
         unsafe { cvt(ffi::SSL_CTX_set_tmp_ecdh(self.as_ptr(), key.as_ptr()) as c_int).map(|_| ()) }
     }
 
+    /// Sets the parameters to be used during ephemeral RSA key exchange.
+    ///
+    /// This corresponds to `SSL_CTX_set_tmp_rsa`.
+    pub fn set_tmp_rsa(&mut self, key: &Rsa<Private>) -> Result<(), ErrorStack> {
+        unsafe { cvt(ffi::SSL_CTX_set_tmp_rsa(self.as_ptr(), key.as_ptr()) as c_int).map(|_| ()) }
+    }
+
     /// Sets the callback which will generate parameters to be used during ephemeral elliptic curve
     /// Diffie-Hellman key exchange.
     ///
